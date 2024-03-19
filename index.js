@@ -17,3 +17,28 @@ class Svg{
         this.shapeElement = shape.render()
     }
 }
+
+const questions = [
+    {
+        type:"input",
+        name:"text",
+        message: "Text: Enter up to (3) characters:",
+    },
+    {
+        type:"input",
+        name: "text-color",
+        message: "Text Color: Enter a color keyword.:",
+    },
+    {
+        type:"input",
+        name: "shape",
+        message: "Shape Color: Enter a color keyword.:",
+    },
+    {
+        type:"input",
+        name:"pixel-image",
+        message: "Choose which image shaoe you would like.",
+        choices: ["Circle", "Square", "Triangle"],
+    },
+];
+
