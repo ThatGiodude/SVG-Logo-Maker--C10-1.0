@@ -1,7 +1,7 @@
 const filesystem = require('./node_modules/graceful-fs/graceful-fs');
 const inquirer = require("inquirer");
 const {Circle, Square, Triangle} = require(".lib/shapes");
-
+//imports all the necessary packages and the shape folder. still have to export that REMEMBER
 class Svg{
     constructor(){
         this.textElement = ''
@@ -17,7 +17,7 @@ class Svg{
         this.shapeElement = shape.render()
     }
 }
-
+//Defines the array using inquierer
 const questions = [
     {
         type:"input",
@@ -42,3 +42,24 @@ const questions = [
     },
 ];
 
+function writeToFile(fileName, data) {
+    console.log("Writing [" + data +"] to file [" + fileName + "]")
+    filesystem.writeFile(fileName, data, function (err) {if (err) {return console.log(err);
+    } console.log("Congrats! You Generated a logo.SVG!");
+});
+}
+
+async function init() {
+    console.log("Started Initialization");
+    const svgString = "";
+    const svg_File = "logo.svg";
+    const answers = await inquirer.createPromptModule(questions);
+
+    const user_text = "";
+    if (answers.text.length > 0 && answers.text.length < 4) {
+        user_text = answers.text;
+    } else {
+        console.log("Invalid user input detected! Please enter 1-3 characters only.");
+        return;
+    }
+}
