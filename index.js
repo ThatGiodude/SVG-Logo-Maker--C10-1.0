@@ -62,4 +62,14 @@ async function init() {
         console.log("Invalid user input detected! Please enter 1-3 characters only.");
         return;
     }
+    console.log("User Text: [" + user_text + "]");
+        //font color
+    user_font_color = answers["text-color"];
+    console.log("user font color: [" + user_font_color + "]");
+        // shape color
+    user_shape_color = answers.shape;
+    console.log("User shape color: [" + user_shape_color + "]");
+        //shape type
+    user_shape_type = answers["pixel-image"];
+    console.log("User entered shape + [" + user_shape_type + "]");
 }
