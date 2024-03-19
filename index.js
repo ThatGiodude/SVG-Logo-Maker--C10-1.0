@@ -1,6 +1,6 @@
-const filesystem = require('./node_modules/graceful-fs/graceful-fs');
-const inquirer = require("inquirer");
-const {Circle, Square, Triangle} = require(".lib/shapes");
+import { writeFile } from './node_modules/graceful-fs/graceful-fs';
+import { prompt } from "inquirer";
+import { Circle, Square, Triangle } from ".lib/shapes";
 //imports all the necessary packages and the shape folder. still have to export that REMEMBER
 class Svg{
     constructor(){
@@ -44,7 +44,7 @@ const questions = [
 
 function writeToFile(fileName, data) {
     console.log("Writing [" + data +"] to file [" + fileName + "]")
-    filesystem.writeFile(fileName, data, function (err) {if (err) {return console.log(err);
+    writeFile(fileName, data, function (err) {if (err) {return console.log(err);
     } console.log("Congrats! You Generated a logo.SVG!");
 });
 }
@@ -53,9 +53,11 @@ async function init() {
     console.log("Started Initialization");
     const svgString = "";
     const svg_File = "logo.svg";
-    const answers = await inquirer.createPromptModule(questions);
 
-    const user_text = "";
+
+    const answers = await prompt(questions);
+
+    let user_text = "";
     if (answers.text.length > 0 && answers.text.length < 4) {
         user_text = answers.text;
     } else {
@@ -72,4 +74,30 @@ async function init() {
         //shape type
     user_shape_type = answers["pixel-image"];
     console.log("User entered shape + [" + user_shape_type + "]");
+
+    let user_shape;
+    if (user_shape_type === "Square" || user_shape_type === "square") {
+        user_shape = new Square();
+        console.log("User selected Square shape");
+    } else if (user_shape_type === "Circle" || user_shape_type === "circle") {
+        user_shape = new Circle();
+        console.log("User selected Circle shape");
+    } else if (user_shape_type === "Triangle" || user_shape_type === "triangle") {
+        user_shape = new Triangle();
+        console.log("User selected Triangle shape");
+    } else {
+        console.log("Invalid Shape");
+    }
+    user_shape.setColor(user_shape_color);
+
+    const svg = new Svg();
+    svg.setTextElement(user_text, user_font_color);
+    svg.setShapeElement(user_shape);
+    svgString = svg.render();
+
+    console.log("Displaying shape:\n\n" + svgString);
+    console.log("Shape creation finished!");
+    console.log("Writing shape to file...");
+    writeToFile(svg_File, svgString);
 }
+init()
