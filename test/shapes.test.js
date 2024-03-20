@@ -7,7 +7,7 @@ describe('Shapes', () => {
         const square = new Square('abc', 'black', 'square', 'blue');
         const testSquare = square.render('green');
         console.log(testSquare);
-        expect(testSquare).toEqual(`<rect width="250" height="250" fill="blue"/>`);
+        expect(testSquare).toEqual(`<rect x="50" width="200" height="200" fill="blue"/>`);
       });
     });
   });
@@ -18,7 +18,7 @@ describe('Shapes', () => {
         const circle = new Circle('efg', 'white', 'circle', 'black');
         const testCircle = circle.render('blue');
         console.log(testCircle);
-        expect(testCircle).toEqual(`<circle cx="50" cy="50" r="50" fill="black"/>`);
+        expect(testCircle).toEqual(`<circle cx="50" cy="50" r="100" height="100%" width="100%" fill="black"/>`);
       });
     });
   });
@@ -29,7 +29,7 @@ describe('Shapes', () => {
         const triangle = new Triangle('123', 'yellow', 'square', 'pink');
         const testTriangle = triangle.render('pink');
         console.log(testTriangle);
-        expect(testTriangle).toEqual(`<polygon points="0 100, 25 ,0 80, 115" fill="pink"/>`);
+        expect(testTriangle).toEqual(`<polygon points="0,200 300,200 150,0" fill="pink"/>`);
       });
     });
   });
